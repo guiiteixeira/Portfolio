@@ -4,7 +4,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
+import Certificate from './Certificate';
 
 @Entity('projects')
 class Project {
@@ -25,6 +28,16 @@ class Project {
 
   @Column()
   mediaPath: string;
+
+  @Column()
+  link: string;
+
+  @Column()
+  certificate_id: string;
+
+  @OneToOne(() => Certificate, { eager: true })
+  @JoinColumn({ name: 'certificate_id' })
+  certificate: Certificate;
 
   @CreateDateColumn()
   created_at: Date;
